@@ -37,7 +37,7 @@ export const Navbar = () => {
           <span className="relative z-10">
             <span className="">
               <img
-                src="\public\projects\us-logo.png"
+                src="/projects/us-logo.png"
                 alt="Logo"
                 className="h-18 w-20 object-contain"
               />
