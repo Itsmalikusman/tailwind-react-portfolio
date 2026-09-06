@@ -1,83 +1,120 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import {
+  Code2,
+  Database,
+  Gauge,
+  PlugZap,
+  Wrench,
+} from "lucide-react";
 
-const skills = [
-  // Frontend
-  { name: "HTML/CSS", level: 95, category: "frontend" },
-  { name: "JavaScript", level: 70, category: "frontend" },
-  { name: "React", level: 80, category: "frontend" },
-  { name: "Bootstarp", level: 95, category: "frontend" },
-  { name: "Tailwind CSS", level: 90, category: "frontend" },
-  { name: "Next.js", level: 75, category: "frontend" },
-
-  // Backend
-  { name: " PHP", level: 60, category: "backend" },
-  { name: "Laravel", level: 65, category: "backend" },
-  { name: "PostgreSQL", level: 70, category: "backend" },
-  { name: "GraphQL", level: 60, category: "backend" },
-
-  // Tools
-  { name: "Git/GitHub", level: 90, category: "tools" },
-  { name: "Docker", level: 70, category: "tools" },
-  { name: "Figma", level: 90, category: "tools" },
-  { name: "VS Code", level: 95, category: "tools" },
-  { name: "Cursor", level: 90, category: "tools" },
+const skillGroups = [
+  {
+    title: "Frontend development",
+    icon: Code2,
+    skills: [
+      "HTML5",
+      "CSS3",
+      "SCSS",
+      "JavaScript ES6+",
+      "Vue.js",
+      "React.js",
+      "Next.js",
+      "Tailwind CSS",
+      "Bootstrap",
+      "Responsive Web Design",
+      "Laravel Blade",
+    ],
+  },
+  {
+    title: "Backend and integrations",
+    icon: PlugZap,
+    skills: [
+      "Laravel",
+      "PHP working knowledge",
+      "Node.js",
+      "REST APIs",
+      "Third-party APIs",
+      "Payment gateways",
+      "Pusher",
+      "Real-time integrations",
+    ],
+  },
+  {
+    title: "Databases",
+    icon: Database,
+    skills: ["MySQL", "PostgreSQL", "MongoDB", "SQLite", "SQL"],
+  },
+  {
+    title: "Performance and maintenance",
+    icon: Gauge,
+    skills: [
+      "Core Web Vitals",
+      "Google PageSpeed Insights",
+      "Frontend Performance Optimization",
+      "Mobile Responsiveness",
+      "Debugging",
+      "Refactoring",
+      "Code Optimization",
+    ],
+  },
+  {
+    title: "Development and deployment tools",
+    icon: Wrench,
+    skills: [
+      "AWS",
+      "Docker",
+      "Vercel",
+      "Netlify",
+      "Git",
+      "GitHub",
+      "GitLab",
+      "SourceTree",
+      "Postman",
+      "Webpack Mix",
+    ],
+  },
 ];
 
-const categories = ["all", "frontend", "backend", "tools"];
-
 export const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
-  );
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          My <span className="text-primary"> Skills</span>
-        </h2>
-
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category, key) => (
-            <button
-              key={key}
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-forefround hover:bd-secondary"
-              )}
-            >
-              {category}
-            </button>
-          ))}
+    <section id="skills" aria-labelledby="skills-heading" className="section-shell">
+      <div className="container mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="section-kicker">Technical toolkit</span>
+          <h2 id="skills-heading" className="section-heading">
+            Skills Built for <span className="text-primary">Production</span>
+          </h2>
+          <p className="section-copy mt-5">
+            A practical frontend-focused toolkit for building, integrating,
+            optimizing, and maintaining modern web products.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill, key) => (
-            <div
-              key={key}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
+        <div className="mt-12 grid items-stretch gap-5 md:grid-cols-2">
+          {skillGroups.map(({ title, icon: Icon, skills }, index) => (
+            <article
+              key={title}
+              className={`gradient-border card-hover h-full p-6 text-left sm:p-7 ${
+                index === skillGroups.length - 1 ? "md:col-span-2" : ""
+              }`}
             >
-              <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg"> {skill.name}</h3>
-              </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
-                  style={{ width: skill.level + "%" }}
-                />
+              <div className="mb-5 flex items-center gap-3">
+                <span className="inline-flex rounded-xl border border-primary/20 bg-primary/10 p-2.5 text-primary">
+                  <Icon aria-hidden="true" size={22} />
+                </span>
+                <h3 className="text-lg font-semibold sm:text-xl">{title}</h3>
               </div>
 
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
-                  {skill.level}%
-                </span>
-              </div>
-            </div>
+              <ul className="flex flex-wrap gap-2.5" aria-label={`${title} skills`}>
+                {skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="rounded-full border border-border bg-secondary/70 px-3.5 py-1.5 text-sm font-medium text-foreground/85"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       </div>

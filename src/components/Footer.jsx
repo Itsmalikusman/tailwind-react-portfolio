@@ -2,18 +2,19 @@ import { ArrowUp } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="py-4 lg:px-12 px-4 bg-transparent relative border-border mt-12 flex flex-wrap justify-between items-center">
-      {" "}
-      <p className="text-sm text-muted-foreground">
-        {" "}
-        &copy; {new Date().getFullYear()} Pedrotech.co. All rights reserved.
-      </p>
-      <a
-        href="#hero"
-        className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
-      >
-        <ArrowUp size={20} />
-      </a>
+    <footer className="relative z-10 border-t border-border/70 bg-background/80 py-6">
+      <div className="container flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <p className="text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} Muhammad Usman. All rights reserved.
+        </p>
+        <a
+          href="#hero"
+          aria-label="Back to the top of the page"
+          className="rounded-full border border-primary/25 bg-primary/10 p-2.5 text-primary transition-colors hover:border-primary/60 hover:bg-primary/20"
+        >
+          <ArrowUp aria-hidden="true" size={19} />
+        </a>
+      </div>
     </footer>
   );
 };

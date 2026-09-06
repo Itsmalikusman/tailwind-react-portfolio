@@ -1,182 +1,139 @@
 import {
-  Instagram,
+  ArrowUpRight,
+  Download,
+  Github,
   Linkedin,
   Mail,
   MapPin,
   Phone,
-  Send,
-  Twitch,
-  Twitter,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+
+const contactDetails = [
+  {
+    label: "Email",
+    value: "itsmalikusman49@gmail.com",
+    href: "mailto:itsmalikusman49@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "Phone",
+    value: "+92 330 9892624",
+    href: "tel:+923309892624",
+    icon: Phone,
+  },
+  {
+    label: "Location",
+    value: "Islamabad/Rawalpindi, Pakistan",
+    icon: MapPin,
+  },
+];
+
+const contactActions = [
+  {
+    label: "Email Me",
+    href: "mailto:itsmalikusman49@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/usman-fullstack/",
+    icon: Linkedin,
+    external: true,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Itsmalikusman",
+    icon: Github,
+    external: true,
+  },
+  {
+    label: "Download Resume",
+    href: "/Muhammad_Usman_Resume.pdf",
+    icon: Download,
+    download: "Muhammad_Usman_Resume.pdf",
+  },
+];
 
 export const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setIsSubmitting(false);
-    }, 1500);
-  };
   return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Get In <span className="text-primary"> Touch</span>
-        </h2>
+    <section id="contact" aria-labelledby="contact-heading" className="section-shell">
+      <div className="container mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="section-kicker">Let&apos;s connect</span>
+          <h2 id="contact-heading" className="section-heading">
+            Get In <span className="text-primary">Touch</span>
+          </h2>
+          <p className="section-copy mt-5">
+            Have a frontend opportunity, product challenge, or collaboration in
+            mind? Reach out through any of the verified channels below.
+          </p>
+        </div>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to reach out.
-          I'm always open to discussing new opportunities.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Contact Information
-            </h3>
-
-            <div className="space-y-6 justify-center">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />{" "}
+        <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="gradient-border p-6 text-left sm:p-8">
+            <h3 className="text-2xl font-bold">Contact information</h3>
+            <address className="mt-7 space-y-6 not-italic">
+              {contactDetails.map(({ label, value, href, icon: Icon }) => (
+                <div key={label} className="flex min-w-0 items-start gap-4">
+                  <span className="shrink-0 rounded-xl border border-primary/20 bg-primary/10 p-3 text-primary">
+                    <Icon aria-hidden="true" size={21} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-muted-foreground">
+                      {label}
+                    </p>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="mt-0.5 block break-words font-semibold text-foreground transition-colors hover:text-primary"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="mt-0.5 font-semibold text-foreground">{value}</p>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-medium text-start"> Email</h4>
-                  <a
-                    href="mailto:itsmalikusman49@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    itsmalikusman49@gmail.com
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium text-start"> Phone</h4>
-                  <a
-                    href="tel:+923165313724"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    +92 316 5313724
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium text-start"> Location</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Islamabad, Pakistan.
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8 text-start">
-              <h4 className="font-medium mb-4 "> Connect With Me</h4>
-              <div className="flex space-x-4 justify-start">
-                <a href="https://www.linkedin.com/in/muhammad-usman-67a4931a0/" target="_blank">
-                  <Linkedin />
-                </a>
-                <a href="https://x.com/ItsmalikUsman_?t=TJngfIpfTL2hqHOSD21HDQ&s=09" target="_blank">
-                  <Twitter />
-                </a>
-                <a href="https://www.instagram.com/malik_mani._/" target="_blank">
-                  <Instagram />
-                </a>
-              </div>
-            </div>
+              ))}
+            </address>
           </div>
 
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
-          >
-            <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
+          <div className="gradient-border relative overflow-hidden p-6 text-left sm:p-8 lg:p-10">
+            <div className="absolute -right-16 -top-20 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+            <div className="relative">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                Open to opportunities
+              </p>
+              <h3 className="mt-3 text-2xl font-bold sm:text-3xl">
+                Build something thoughtful, fast, and reliable.
+              </h3>
+              <p className="mt-4 max-w-xl leading-7 text-muted-foreground">
+                I&apos;m available to discuss frontend roles, product
+                development, performance optimization, and collaborative
+                engineering work.
+              </p>
 
-            <form className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2 text-start"
-                >
-                  {" "}
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="M.Usman..."
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2 text-start"
-                >
-                  {" "}
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="xyz@gmail.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2 text-start"
-                >
-                  {" "}
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
-                  placeholder="Hello, I'd like to talk about..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2 cursor-pointer"
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {contactActions.map(
+                  ({ label, href, icon: Icon, external, download }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      download={download}
+                      className="cosmic-button-secondary justify-between"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Icon aria-hidden="true" size={18} />
+                        {label}
+                      </span>
+                      {external && <ArrowUpRight aria-hidden="true" size={17} />}
+                    </a>
+                  )
                 )}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-                <Send size={16} />
-              </button>
-            </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
