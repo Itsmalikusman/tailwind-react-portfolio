@@ -1,6 +1,10 @@
 import {
   ArrowUpRight,
+  BookOpen,
+  Car,
+  ChefHat,
   GraduationCap,
+  MessageSquare,
   MonitorCheck,
   ShoppingBag,
 } from "lucide-react";
@@ -23,16 +27,54 @@ const projects = [
     ],
     visitUrl: "https://priceoye.pk/",
     visual: "priceoye",
+    icon: ShoppingBag,
+    category: "E-commerce product",
   },
   {
-    title: "Tabeer Technology",
+    title: "Chefbrigh",
+    type: "Completed at Alright Tech",
+    description:
+      "A private-chef discovery platform connecting clients with chefs for personalised dining. The website showcases chef profiles, cuisine specialities, locations, pricing, and reviews, with separate client and chef registration areas.",
+    tags: ["Chef discovery", "Chef profiles", "Client & chef accounts"],
+    visitUrl: "https://chefbright.pyshraft.com/",
+    icon: ChefHat,
+    category: "Private-chef platform",
+  },
+  {
+    title: "Messy-bible",
+    type: "Completed at Alright Tech",
+    description:
+      "The web administration interface for Messy Bible, delivered as a dedicated dashboard application. This client project provides a separate administrative entry point for the product.",
+    tags: ["Admin interface", "Dashboard", "Web application"],
+    visitUrl: "https://messy-bible-admin-ui.vercel.app/",
+    icon: BookOpen,
+    category: "Administration dashboard",
+  },
+  {
+    title: "Cartengo",
+    type: "Completed at Alright Tech",
+    description:
+      "An automotive commerce website for browsing vehicles and connecting buyers and sellers. The public experience includes car search, auction navigation, and a dedicated sell-your-car page.",
+    tags: ["Automotive commerce", "Car search", "Vehicle sales"],
+    visitUrl: "https://cartengo.apnapindionline.com/car",
+    icon: Car,
+    category: "Automotive marketplace",
+  },
+  {
+    title: "Tabeer",
+    type: "Completed at Alright Tech",
     description:
       "Developed responsive interfaces, routing, dashboards, API integrations, and payment flows for a scholarships and mentorship platform.",
     technologies: ["React.js", "Node.js", "MongoDB", "Stripe", "BitPay"],
     visual: "tabeer",
+    visitUrl: "https://www.tabeeer.com/",
+    icon: GraduationCap,
+    category: "Scholarships & mentorship",
   },
   {
-    title: "SignNTrack",
+    title: "Signtrack",
+    type: "Completed at Alright Tech",
+    visitUrl: "https://sign.pyshraft.com/login",
     description:
       "Built and maintained digital-signature, real-time chat, admin reporting, PDF-signing, calendar, support, and profile modules.",
     technologies: [
@@ -46,6 +88,26 @@ const projects = [
     image: "/projects/proj-3.jpg",
     imageAlt:
       "SignNTrack administration dashboard with user, subscription, and reporting panels",
+  },
+  {
+    title: "Potolo",
+    type: "Completed at Alright Tech",
+    description:
+      "A multi-service platform bringing food delivery, groceries, shopping, and rides together. The public website introduces its services, connects customers with ordering options, and provides access for business partners.",
+    tags: ["Food & groceries", "Shopping & rides", "Partner access"],
+    visitUrl: "https://www.potolo.com/",
+    icon: ShoppingBag,
+    category: "Everyday services platform",
+  },
+  {
+    title: "Consultchat",
+    type: "Completed at Alright Tech",
+    description:
+      "A client web application completed during my time at Alright Tech. The ConsultChat website is the live entry point to the delivered product and is available through the project link below.",
+    tags: ["Client project", "Web application"],
+    visitUrl: "https://consultchat.com/",
+    icon: MessageSquare,
+    category: "Client web application",
   },
 ];
 
@@ -65,6 +127,7 @@ export const ProjectsSection = () => {
           <p className="section-copy mt-5">
             Product and client work spanning e-commerce, education technology,
             real-time collaboration, and complex frontend workflows.
+            Seven client projects below were completed during my time at Alright Tech.
           </p>
         </div>
 
@@ -87,21 +150,13 @@ export const ProjectsSection = () => {
                     <div className="cosmic-grid absolute inset-0 opacity-70" />
                     <div className="relative flex flex-col items-center gap-3 px-6 text-center">
                       <span className="rounded-2xl border border-primary/30 bg-primary/12 p-4 text-primary shadow-[0_0_35px_-12px_rgba(167,139,250,0.9)]">
-                        {project.visual === "priceoye" ? (
-                          <ShoppingBag aria-hidden="true" size={34} />
-                        ) : (
-                          <GraduationCap aria-hidden="true" size={34} />
-                        )}
+                        <project.icon aria-hidden="true" size={34} />
                       </span>
                       <p className="text-lg font-bold text-foreground">
-                        {project.visual === "priceoye"
-                          ? "PriceOye.pk"
-                          : "Scholarships & Mentorship"}
+                        {project.title}
                       </p>
                       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                        {project.visual === "priceoye"
-                          ? "E-commerce product"
-                          : "Tabeer Technology"}
+                        {project.category}
                       </p>
                     </div>
                   </div>
@@ -121,9 +176,9 @@ export const ProjectsSection = () => {
 
                 <ul
                   className="mt-5 flex flex-wrap gap-2"
-                  aria-label={`Technologies used for ${project.title}`}
+                  aria-label={`${project.technologies ? "Technologies used" : "Project highlights"} for ${project.title}`}
                 >
-                  {project.technologies.map((technology) => (
+                  {(project.technologies ?? project.tags).map((technology) => (
                     <li
                       key={technology}
                       className="rounded-full border border-border bg-secondary/80 px-3 py-1 text-xs font-medium text-foreground/80"
